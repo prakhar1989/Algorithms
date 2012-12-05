@@ -16,8 +16,9 @@ Completed Algos and Data Structures
 - Graph datastructure (directed & undirected)
 - Graph Algos
     - Topological Sorting
-    - Shortest path
+    - Shortest hops
     - DFS
     - BFS
     - Connected Components
+    - Dijkstra's Shortest Path
 
