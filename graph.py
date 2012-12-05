@@ -60,6 +60,7 @@ class graph(object):
             if (u!=v):
                 self.node_neighbors[v].append(u)
             self.set_edge_properties((u, v), label=label, weight=wt)
+            self.set_edge_properties((v, u), label=label, weight=wt)
         else:
             raise Exception("Edge (%s, %s) already added in the graph" % (u, v))
 

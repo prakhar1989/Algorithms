@@ -39,17 +39,17 @@ class test_graph(unittest.TestCase):
         self.assertEqual(len(DFS(self.digr, "c")), 7)
         self.assertEqual(len(DFS(self.digr, "f")), 1)
 
-    def test_shortest_path_undirected_graph(self):
-        self.assertEqual(shortest_path(self.gr, "s")["c"], 2)
-        self.assertEqual(shortest_path(self.gr, "c")["s"], 2)
-        self.assertEqual(shortest_path(self.gr, "s")["s"], 0)
-        self.assertEqual(shortest_path(self.gr, "c")["j"], float('inf'))
+    def test_shortest_hops_undirected_graph(self):
+        self.assertEqual(shortest_hops(self.gr, "s")["c"], 2)
+        self.assertEqual(shortest_hops(self.gr, "c")["s"], 2)
+        self.assertEqual(shortest_hops(self.gr, "s")["s"], 0)
+        self.assertEqual(shortest_hops(self.gr, "c")["j"], float('inf'))
 
-    def test_shortest_path_directed_graph(self):
-        self.assertEqual(shortest_path(self.digr, "s")["f"], 3)
-        self.assertEqual(shortest_path(self.digr, "f")["s"], float('inf'))
-        self.assertEqual(shortest_path(self.digr, "s")["s"], 0)
-        self.assertEqual(shortest_path(self.digr, "s")["c"], float('inf'))
+    def test_shortest_hops_directed_graph(self):
+        self.assertEqual(shortest_hops(self.digr, "s")["f"], 3)
+        self.assertEqual(shortest_hops(self.digr, "f")["s"], float('inf'))
+        self.assertEqual(shortest_hops(self.digr, "s")["s"], 0)
+        self.assertEqual(shortest_hops(self.digr, "s")["c"], float('inf'))
 
     def test_undirected_connected_component(self):
         self.assertEqual(len(undirected_connected_components(self.gr)), 3)
@@ -79,5 +79,26 @@ class test_graph(unittest.TestCase):
         digr2.add_edges([("h", "j"), ("j", "k"), ("k", "h")])
         self.assertEqual(len(directed_connected_components(digr2)), 4)
 
+    def test_shortest_path_in_directed_graph(self):
+        digr = digraph()
+        digr.add_nodes(["a", "b", "c", "d", "e", "f"])
+        digr.add_edge(("a", "b"), 7)
+        digr.add_edge(("a", "c"), 9)
+        digr.add_edge(("a", "f"), 14) 
+        digr.add_edge(("f", "e"), 9)
+        digr.add_edge(("c", "f"), 2)
+        digr.add_edge(("c", "d"), 11)
+        digr.add_edge(("b", "c"), 10)
+        digr.add_edge(("b", "d"), 15)
+        digr.add_edge(("d", "e"), 6)
+        self.assertEqual(shortest_path(digr, "a")["a"], 0)
+        self.assertEqual(shortest_path(digr, "a")["b"], 7)
+        self.assertEqual(shortest_path(digr, "a")["c"], 9)
+        self.assertEqual(shortest_path(digr, "a")["d"], 20)
+        self.assertEqual(shortest_path(digr, "a")["e"], 20)
+        self.assertEqual(shortest_path(digr, "a")["f"], 11)
+
+
+    
 if __name__ == "__main__":
     unittest.main()

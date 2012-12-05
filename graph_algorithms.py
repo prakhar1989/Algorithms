@@ -18,7 +18,7 @@ def BFS(gr, s):
                 q.append(each)
     return nodes_explored
 
-def shortest_path(gr, s):
+def shortest_hops(gr, s):
     """ Finds the shortest number of hops required
     to reach a node from s. Returns a dict with mapping:
     destination node from s -> no. of hops
@@ -138,3 +138,19 @@ def inner_DFS(digr, node, node_explored, finishing_times):
     global finishing_counter
     # adds nodes based on increasing order of finishing times
     finishing_times.append(node) 
+
+def shortest_path(digr, s):
+    """ Finds the shortest path from s to every other vertex findable
+    from s using Dijkstra's algorithm in O(mn) time """
+    nodes_explored = [s]
+    nodes_unexplored = DFS(digr, s) # all accessible nodes from s
+    dist = {s:0}
+    nodes_unexplored.remove(s)
+    while len(nodes_unexplored) > 0:
+        edge_frontier = [(u, v) for (u, v) in digr.edges() if u in nodes_explored 
+                        and v in nodes_unexplored]
+        min_dist = min([(dist[u] + digr.get_edge_weight((u, v)), v) for (u, v) in edge_frontier])
+        nodes_explored.append(min_dist[1])
+        nodes_unexplored.remove(min_dist[1])
+        dist[min_dist[1]] = min_dist[0]
+    return dist
