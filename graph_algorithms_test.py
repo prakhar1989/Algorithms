@@ -64,5 +64,20 @@ class test_graph(unittest.TestCase):
         self.assertEqual(sum([order[u] < order[v] for (u, v) in 
                          dag.edges()]), len(dag.edges())) # all comparisons are True
 
+    def test_directed_connected_components(self):
+        digr = digraph()
+        digr.add_nodes(["a", "b", "c", "d", "e", "f", "g", "h", "i"])
+        digr.add_edges([("b", "a"), ("a", "c"), ("c", "b"), ("d", "b")])
+        digr.add_edges([("d", "f"), ("f", "e"), ("e", "d"), ("g", "e")])
+        digr.add_edges([("g", "h"), ("h", "i"), ("i", "g")])
+        self.assertEqual(len(directed_connected_components(digr)), 3)
+        digr2 = digraph()
+        digr2.add_nodes(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"])
+        digr2.add_edges([("a", "b"), ("b", "c"), ("c", "a"), ("b", "d"), ("d", "e")])
+        digr2.add_edges([("e", "f"), ("f", "g"), ("g", "e"), ("d", "g"), ("i", "f")])
+        digr2.add_edges([("h", "g"), ("c", "h"), ("c", "k"), ("h", "i"), ("i", "j")])
+        digr2.add_edges([("h", "j"), ("j", "k"), ("k", "h")])
+        self.assertEqual(len(directed_connected_components(digr2)), 4)
+
 if __name__ == "__main__":
     unittest.main()

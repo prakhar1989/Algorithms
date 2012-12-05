@@ -94,5 +94,13 @@ class test_graph(unittest.TestCase):
         self.gr.clear_node_attributes()
         self.assertEqual(self.gr.node_attributes("a"), [])
 
+    def test_get_transpose_method(self):
+        transpose = self.gr.get_transpose()
+        self.assertEqual(len(transpose.nodes()), len(self.gr.nodes()))
+        self.assertEqual(len(transpose.edges()), len(self.gr.edges()))
+        self.assertTrue(self.gr.has_edge(("a", "b")))
+        self.assertTrue(transpose.has_edge(("b", "a")))
+        self.assertFalse(transpose.has_edge(("a", "b")))
+
 if __name__ == "__main__":
     unittest.main()

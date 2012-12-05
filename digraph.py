@@ -1,4 +1,5 @@
 from graph import graph
+from copy import deepcopy
 class digraph(graph):
     """
     Directed Graph class - made of nodes and edges
@@ -7,7 +8,7 @@ class digraph(graph):
     has_edge, nodes, edges, add_node_attribute, node_attributes
     neighbors, del_node, del_edge, node_order, set_edge_weight,
     get_edge_weight, set_edge_properties, get_edge_properties
-    clear_node_attributes, has_cycle
+    clear_node_attributes, get_transpose
     """
 
     DEFAULT_WEIGHT = 1
@@ -61,3 +62,12 @@ class digraph(graph):
             if self.has_edge((n, node)):
                 self.del_edge((n, node))
         del(self.node_neighbors[node])
+
+    def get_transpose(self):
+        """ Returns the transpose of the graph
+        with edges reversed and nodes same """
+        digr = deepcopy(self)
+        for (u, v) in self.edges():
+            digr.del_edge((u, v))
+            digr.add_edge((v, u))
+        return digr

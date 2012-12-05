@@ -93,3 +93,48 @@ def find_sink_node(digr):
     while digr.neighbors(node):
         node = digr.neighbors(node)[0]
     return node
+
+def directed_connected_components(digr):
+    """ Returns a list of strongly connected components
+    in a directed graph using Kosaraju's two pass algorithm """
+    if not digr.DIRECTED:
+        raise Exception("%s is not a directed graph" % digr)
+    finishing_times = DFS_loop(digr.get_transpose())
+    # use finishing_times in descending order
+    nodes_explored, connected_components = [], []
+    for node in finishing_times[::-1]:
+        component = []
+        outer_dfs(digr, node, nodes_explored, component)
+        if component:
+            nodes_explored += component
+            connected_components.append(component)
+    return connected_components
+
+def outer_dfs(digr, node, nodes_explored, path):
+    if node in path or node in nodes_explored: 
+        return False
+    path.append(node)
+    for each in digr.neighbors(node):
+        if each not in path or each not in nodes_explored:
+            outer_dfs(digr, each, nodes_explored, path)
+
+def DFS_loop(digr):
+    """ Core DFS loop used to find strongly connected components
+    in a directed graph """
+    node_explored = [] # list for keeping track of nodes explored
+    finishing_times = [] # list for adding nodes based on their finishing times
+    for node in digr.nodes():
+        if node not in node_explored:
+            leader_node = node
+            inner_DFS(digr, node, node_explored, finishing_times)
+    return finishing_times 
+
+def inner_DFS(digr, node, node_explored, finishing_times):
+    """ Inner DFS used in DFS loop method """
+    node_explored.append(node) # mark explored
+    for each in digr.neighbors(node):
+        if each not in node_explored:
+            inner_DFS(digr, each, node_explored, finishing_times)
+    global finishing_counter
+    # adds nodes based on increasing order of finishing times
+    finishing_times.append(node) 
