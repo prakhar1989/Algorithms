@@ -21,4 +21,7 @@ Completed Algos and Data Structures
     - BFS
     - Connected Components
     - Dijkstra's Shortest Path
-
+- Heap datastructure
+	- Max heaps
+	- Min heaps (priority queue)
+	- Heapsort
