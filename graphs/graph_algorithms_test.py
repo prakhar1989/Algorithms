@@ -98,7 +98,20 @@ class test_graph(unittest.TestCase):
         self.assertEqual(shortest_path(digr, "a")["e"], 20)
         self.assertEqual(shortest_path(digr, "a")["f"], 11)
 
+    def test_prims_minimum_spanning_tree(self):
+        lines = [l for l in open("edges.txt")]
+        lines = lines[1:]
+        edges = (l.split() for l in lines)
+        gr = graph()
+        for (u, v, w) in edges:
+            if u not in gr.nodes():
+                gr.add_node(u)
+            if v not in gr.nodes():
+                gr.add_node(v)
+            gr.add_edge( (u, v), int(w) )
 
-    
+        min_cost = minimum_spanning_tree(gr)
+        self.assertEqual(min_cost, 39)
+
 if __name__ == "__main__":
     unittest.main()

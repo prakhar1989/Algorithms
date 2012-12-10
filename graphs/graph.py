@@ -156,6 +156,15 @@ class graph(object):
         """Returns the weight of an edge """
         return self.get_edge_properties(edge).setdefault("weight", self.DEFAULT_WEIGHT)
 
+    def get_edge_weights(self):
+        """ Returns a list of all edges with their weights """
+        edge_list = []
+        for node in self.nodes():
+            for each in self.neighbors(node):
+                edge = (node, each)
+                edge_list.append((self.get_edge_weight(edge), edge))
+        return edge_list
+
     def add_node_attribute(self, node, attr):
         """ Adds attributes to a node"""
         if not self.has_node(node):

@@ -20,8 +20,10 @@ Completed Algos and Data Structures
     - DFS
     - BFS
     - Connected Components
-    - Dijkstra's Shortest Path
+    - Dijkstra's Shortest Path - O(mlogn)
+    - Prim's Minimum Cost Spanning Tree - O(mlogn)
 - Heap datastructure
 	- Max heaps
 	- Min heaps (priority queue)
 	- Heapsort
+- Job Scheduling

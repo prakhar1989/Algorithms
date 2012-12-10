@@ -2,6 +2,7 @@ from collections import deque
 from graph import graph
 from digraph import digraph
 from copy import deepcopy
+import heapq
 
 def BFS(gr, s):
     """ Breadth first search 
@@ -141,16 +142,80 @@ def inner_DFS(digr, node, node_explored, finishing_times):
 
 def shortest_path(digr, s):
     """ Finds the shortest path from s to every other vertex findable
-    from s using Dijkstra's algorithm in O(mn) time """
+    from s using Dijkstra's algorithm in O(mlogn) time. Uses heaps
+    for super fast implementation """
     nodes_explored = [s]
-    nodes_unexplored = DFS(digr, s) # all accessible nodes from s
+    nodes_unexplored = DFS(digr, s)[1:] # all accessible nodes from s
     dist = {s:0}
-    nodes_unexplored.remove(s)
-    while len(nodes_unexplored) > 0:
-        edge_frontier = [(u, v) for (u, v) in digr.edges() if u in nodes_explored 
-                        and v in nodes_unexplored]
-        min_dist = min([(dist[u] + digr.get_edge_weight((u, v)), v) for (u, v) in edge_frontier])
-        nodes_explored.append(min_dist[1])
-        nodes_unexplored.remove(min_dist[1])
-        dist[min_dist[1]] = min_dist[0]
+    node_heap = []
+
+    for n in nodes_unexplored:
+        min = compute_min_dist(digr, n, nodes_explored, dist)
+        heapq.heappush(node_heap, (min, n))
+
+    while len(node_heap) > 0:
+        min_dist, nearest_node = heapq.heappop(node_heap)
+        dist[nearest_node] = min_dist
+        nodes_explored.append(nearest_node)
+        nodes_unexplored.remove(nearest_node)
+
+        # recompute keys for just popped node
+        for v in digr.neighbors(nearest_node):
+            if v in nodes_unexplored:
+                for i in range(len(node_heap)):
+                    if node_heap[i][1] == v:
+                        node_heap[i] = (compute_min_dist(digr, v, nodes_explored, dist), v)
+                        heapq.heapify(node_heap)
+
     return dist
+
+def compute_min_dist(digr, n, nodes_explored, dist):
+    """ Computes the min dist of node n from a set of
+    nodes explored in digr, using dist dict. Used in shortest path """
+    min = float('inf')
+    for v in nodes_explored:
+        if digr.has_edge((v, n)):
+            d = dist[v] + digr.get_edge_weight((v, n))
+            if d < min: min = d
+    return min
+
+def minimum_spanning_tree(gr):
+    """ Uses prim's algorithm to return the minimum 
+    cost spanning tree in a undirected connected graph.
+    Works only with undirected and connected graphs """
+    s = gr.nodes()[0] 
+    nodes_explored = [s]
+    nodes_unexplored = gr.nodes()
+    nodes_unexplored.remove(s)
+    min_cost, node_heap = 0, []
+
+    #computes the key for each vertex in unexplored
+    for n in nodes_unexplored:
+        min = compute_key(gr, n, nodes_explored)
+        heapq.heappush(node_heap, (min, n))
+
+    while len(nodes_unexplored) > 0:
+        # adds the cheapest to "explored"
+        node_cost, min_node = heapq.heappop(node_heap)
+        min_cost += node_cost
+        nodes_explored.append(min_node)
+        nodes_unexplored.remove(min_node)
+
+        # recompute keys for neighbors of deleted node
+        for v in gr.neighbors(min_node):
+            if v in nodes_unexplored:
+                for i in range(len(node_heap)):
+                    if node_heap[i][1] == v:
+                        node_heap[i] = (compute_key(gr, v, nodes_explored), v)
+                        heapq.heapify(node_heap)
+    return min_cost
+
+def compute_key(gr, n, nodes_explored):
+    """ computes minimum key for node n from a set of nodes_explored
+    in graph gr. Used in Prim's implementation """
+    min = float('inf')
+    for v in gr.neighbors(n):
+        if v in nodes_explored:
+            w = gr.get_edge_weight((n, v))
+            if w < min: min = w
+    return min
