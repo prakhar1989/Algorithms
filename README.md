@@ -2,7 +2,6 @@ Algos in Python
 ======
 
 Implementation for the algorithms and datastructures taught in [CS161](http://openclassroom.stanford.edu/MainFolder/CoursePage.php?course=IntroToAlgorithms), in Python
-Includes test code - doctests for few and full unittests for others
 
 Completed
 ---

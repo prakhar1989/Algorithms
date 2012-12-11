@@ -51,7 +51,7 @@ class UnionFind(object):
         groupb = self.group[leaderb]
         if len(groupa) < len(groupb):
             # swap a and b if a is a smaller set
-            a, leadera, groupa, b, leaderb, groupb = b, leaderb, groupb, a, leadera, groupa
+            leadera, groupa, leaderb, groupb = leaderb, groupb, leadera, groupa
         groupa |= groupb # taking union of a with b
         del self.group[leaderb] # delete b
         for k in groupb:

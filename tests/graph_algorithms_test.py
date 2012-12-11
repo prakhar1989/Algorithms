@@ -115,5 +115,20 @@ class test_graph(unittest.TestCase):
         min_cost = minimum_spanning_tree(gr)
         self.assertEqual(min_cost, 39)
 
+    def test_kruskals_minimum_spanning_tree(self):
+        lines = [l for l in open("tests/edges.txt")]
+        lines = lines[1:]
+        edges = (l.split() for l in lines)
+        gr = graph()
+        for (u, v, w) in edges:
+            if u not in gr.nodes():
+                gr.add_node(u)
+            if v not in gr.nodes():
+                gr.add_node(v)
+            gr.add_edge( (u, v), int(w) )
+
+        min_cost = kruskal_MST(gr)
+        self.assertEqual(min_cost, 39)
+
 if __name__ == "__main__":
     unittest.main()

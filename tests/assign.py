@@ -1,8 +1,7 @@
 import os, sys
 sys.path.append(os.path.join(os.getcwd(), os.path.pardir))
-
-from graphs import digraph
-from heaps import minheap
+from graphs.graph import graph
+from union_find.unionfind import UnionFind
 
 lines = [l for l in open("edges.txt").readlines()]
 lines = lines[1:]
@@ -16,10 +15,15 @@ for (u, v, w) in edges:
         gr.add_node(v)
     gr.add_edge((u, v), int(w))
 
-
 def kruskal_MST(gr):
     sorted_edges = sorted(gr.get_edge_weights())
-    temp_gr = {}
+    uf = UnionFind()
     min_cost = 0
     for (w, (u, v)) in sorted_edges:
-        temp_gr[u] = v
+        if (not uf.get_leader(u) and not uf.get_leader(v)) \
+                or (uf.get_leader(u) != uf.get_leader(v)):
+            uf.insert(u, v)
+            min_cost += w
+    return min_cost
+
+print kruskal_MST(gr)
