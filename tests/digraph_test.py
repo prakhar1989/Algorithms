@@ -1,5 +1,7 @@
+import os, sys
+sys.path.append(os.path.join(os.getcwd(), os.path.pardir))
 import unittest
-from digraph import digraph
+from graphs.digraph import digraph
 
 class test_graph(unittest.TestCase):
 

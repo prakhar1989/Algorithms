@@ -1,5 +1,7 @@
+import os, sys
+sys.path.append(os.path.join(os.getcwd(), os.path.pardir))
 import unittest
-from graph import graph
+from graphs.graph import graph
 
 
 class test_graph(unittest.TestCase):

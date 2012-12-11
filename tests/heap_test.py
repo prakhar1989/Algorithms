@@ -1,6 +1,8 @@
+import os, sys
+sys.path.append(os.path.join(os.getcwd(), os.path.pardir))
 import unittest
-from minheap import minheap
-from maxheap import maxheap
+from heaps.minheap import minheap
+from heaps.maxheap import maxheap
 import random
 
 class test_heap(unittest.TestCase):

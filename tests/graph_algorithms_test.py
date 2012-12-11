@@ -1,7 +1,9 @@
+import os, sys
+sys.path.append(os.path.join(os.getcwd(), os.path.pardir))
 import unittest
-from digraph import digraph
-from graph import graph
-from graph_algorithms import *
+from graphs.digraph import digraph
+from graphs.graph import graph
+from graphs.graph_algorithms import *
 
 class test_graph(unittest.TestCase):
 
@@ -99,7 +101,7 @@ class test_graph(unittest.TestCase):
         self.assertEqual(shortest_path(digr, "a")["f"], 11)
 
     def test_prims_minimum_spanning_tree(self):
-        lines = [l for l in open("edges.txt")]
+        lines = [l for l in open("tests/edges.txt")]
         lines = lines[1:]
         edges = (l.split() for l in lines)
         gr = graph()

@@ -4,7 +4,7 @@ Algos in Python
 Implementation for the algorithms and datastructures taught in [CS161](http://openclassroom.stanford.edu/MainFolder/CoursePage.php?course=IntroToAlgorithms), in Python
 Includes test code - doctests for few and full unittests for others
 
-Completed Algos and Data Structures
+Completed
 ---
 - Karatsuba Multiplication
 - Basic Sorting
@@ -19,8 +19,18 @@ Completed Algos and Data Structures
     - Connected Components
     - Dijkstra's Shortest Path - O(mlogn)
     - Prim's Minimum Cost Spanning Tree - O(mlogn)
+    - Kruskal's Minimum Spanning Tree - O(mlogn)
 - Heap datastructure
 	- Max heaps
 	- Min heaps (priority queue)
 	- Heapsort
 - Job Scheduling
+- [UnionFind](http://en.wikipedia.org/wiki/Disjoint-set_data_structure) Data Structure
+
+Tests
+---
+    python -m tests.graph_test
+    python -m tests.digraph_test
+    python -m tests.graph_algorithms_test
+    python -m tests.heap_test
+    python -m tests.unionfind_test

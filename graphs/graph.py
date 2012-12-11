@@ -159,10 +159,13 @@ class graph(object):
     def get_edge_weights(self):
         """ Returns a list of all edges with their weights """
         edge_list = []
+        unique_edges = []
         for node in self.nodes():
             for each in self.neighbors(node):
                 edge = (node, each)
-                edge_list.append((self.get_edge_weight(edge), edge))
+                if (each, node) not in unique_edges:
+                    edge_list.append((self.get_edge_weight(edge), edge))
+                    unique_edges.append(edge)
         return edge_list
 
     def add_node_attribute(self, node, attr):
