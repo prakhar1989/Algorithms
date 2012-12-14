@@ -19,6 +19,7 @@ Completed
     - Dijkstra's Shortest Path - O(mlogn)
     - Prim's Minimum Cost Spanning Tree - O(mlogn)
     - Kruskal's Minimum Spanning Tree - O(mlogn)
+    - Max k Clustering
 - Heap datastructure
 	- Max heaps
 	- Min heaps (priority queue)

@@ -3,10 +3,8 @@ class graph(object):
     Graph class - made of nodes and edges
 
     methods: add_edge, add_edges, add_node, add_nodes, has_node,
-    has_edge, nodes, edges, add_node_attribute, node_attributes
-    neighbors, del_node, del_edge, node_order, set_edge_weight,
-    get_edge_weight, set_edge_properties, get_edge_properties
-    clear_node_attributes
+    has_edge, nodes, edges, neighbors, del_node, del_edge, node_order,
+    set_edge_weight, get_edge_weight, 
     """
 
     DEFAULT_WEIGHT = 1
@@ -15,31 +13,22 @@ class graph(object):
     def __init__(self):
         self.node_neighbors = {}
 
-        # Metadata about edges
-        self.edge_properties = {} # Edge -> dict mapping
-
-        # Metadata about nodes
-        self.node_attr = {} # Node -> dict mapping
-
     def __str__(self):
         return "Undirected Graph \nNodes: %s \nEdges: %s" % (self.nodes(), self.edges())
 
     def add_nodes(self, nodes):
         """
-        Takes a list of nodes as input and adds these
-        to a graph
+        Takes a list of nodes as input and adds these to a graph
         """
         for node in nodes:
             self.add_node(node)
 
-    def add_node(self, node, attrs=None):
+    def add_node(self, node):
         """
         Adds a node to the graph
         """
         if node not in self.node_neighbors:
-            if attrs is None: attrs = []
-            self.node_neighbors[node] = []
-            self.node_attr[node] = attrs
+            self.node_neighbors[node] = {}
         else:
             raise Exception("Node %s is already in graph" % node)
 
@@ -56,11 +45,9 @@ class graph(object):
         """
         u, v = edge
         if (v not in self.node_neighbors[u] and u not in self.node_neighbors[v]):
-            self.node_neighbors[u].append(v)
+            self.node_neighbors[u][v] = wt
             if (u!=v):
-                self.node_neighbors[v].append(u)
-            self.set_edge_properties((u, v), label=label, weight=wt)
-            self.set_edge_properties((v, u), label=label, weight=wt)
+                self.node_neighbors[v][u] = wt
         else:
             raise Exception("Edge (%s, %s) already added in the graph" % (u, v))
 
@@ -84,16 +71,15 @@ class graph(object):
         u, v = edge
         if v not in self.node_neighbors[u]:
             return False
-        else:
-            return True
+        return True
 
     def neighbors(self, node):
         """
         Returns a list of neighbors for a node
         """
-        if node not in self.node_neighbors:
+        if not self.has_node(node):
             raise "Node %s not in graph" % node
-        return self.node_neighbors[node]
+        return self.node_neighbors[node].keys()
 
     def del_node(self, node):
         """
@@ -112,9 +98,9 @@ class graph(object):
         u, v = edge
         if not self.has_edge(edge):
             raise Exception("Edge (%s, %s) not an existing edge" % (u, v))
-        self.node_neighbors[u].remove(v)
+        del self.node_neighbors[u][v]
         if (u!=v):
-            self.node_neighbors[v].remove(u)
+            del self.node_neighbors[v][u]
 
     def node_order(self, node):
         """
@@ -134,51 +120,30 @@ class graph(object):
         return edge_list
 
     # Methods for setting properties on nodes and edges
-
-    def get_edge_properties(self, edge):
-        """Returns the edge properties; {} if none exist """
-        u, v = edge
-        if not self.has_edge(edge):
-            raise Exception("Edge (%s, %s) not an existing edge" % (u, v))
-        return self.edge_properties.setdefault(edge, {})
-
-    def set_edge_properties(self, edge, **properties):
-        u, v = edge
-        if not self.has_edge(edge):
-            raise Exception("Edge (%s, %s) not an existing edge" % (u, v))
-        self.edge_properties.setdefault(edge, {}).update(properties)
-
     def set_edge_weight(self, edge, wt):
         """Set the weight of the edge """
-        self.set_edge_properties(edge, weight=wt)
+        u, v = edge
+        self.node_neighbors[u][v] = wt
+        if u != v:
+            self.node_neighbors[v][u] = wt
 
     def get_edge_weight(self, edge):
         """Returns the weight of an edge """
-        return self.get_edge_properties(edge).setdefault("weight", self.DEFAULT_WEIGHT)
+        u, v = edge
+        if not self.has_edge((u, v)):
+            raise Exception("%s not an existing edge" % edge)
+        return self.node_neighbors[u].get(v, self.DEFAULT_WEIGHT)
 
     def get_edge_weights(self):
         """ Returns a list of all edges with their weights """
         edge_list = []
-        unique_edges = []
-        for node in self.nodes():
-            for each in self.neighbors(node):
-                edge = (node, each)
-                if (each, node) not in unique_edges:
-                    edge_list.append((self.get_edge_weight(edge), edge))
-                    unique_edges.append(edge)
+        unique_list = {}
+        for u in self.nodes():
+            for v in self.neighbors(u):
+                if not  unique_list.get(v) or u not in unique_list.get(v):
+                    edge_list.append((self.node_neighbors[u][v], (u, v)))
+                    if u not in unique_list:
+                        unique_list[u] = [v]
+                    else:
+                        unique_list[u].append(v)
         return edge_list
-
-    def add_node_attribute(self, node, attr):
-        """ Adds attributes to a node"""
-        if not self.has_node(node):
-            raise Exception("Node %s does not exist in graph" % node)
-        self.node_attr[node] = attr
-
-    def node_attributes(self, node):
-        """ Returns attributes of a node if it exists, none otherwise"""
-        return self.node_attr[node]
-
-    def clear_node_attributes(self):
-        """ Clears the attributes set on nodes """
-        for node in self.nodes():
-            self.node_attr[node] = []

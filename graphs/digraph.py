@@ -5,10 +5,8 @@ class digraph(graph):
     Directed Graph class - made of nodes and edges
 
     methods: add_edge, add_edges, add_node, add_nodes, has_node,
-    has_edge, nodes, edges, add_node_attribute, node_attributes
-    neighbors, del_node, del_edge, node_order, set_edge_weight,
-    get_edge_weight, set_edge_properties, get_edge_properties
-    clear_node_attributes, get_transpose
+    has_edge, nodes, edges, neighbors, del_node, del_edge, node_order,
+    set_edge_weight, get_edge_weight, 
     """
 
     DEFAULT_WEIGHT = 1
@@ -16,12 +14,6 @@ class digraph(graph):
 
     def __init__(self):
         self.node_neighbors = {}
-
-        # Metadata about edges
-        self.edge_properties = {} # Edge -> dict mapping
-
-        # Metadata about nodes
-        self.node_attr = {} # Node -> dict mapping
 
     def __str__(self):
         return "Directed Graph \nNodes: %s \nEdges: %s" % (self.nodes(), self.edges())
@@ -33,11 +25,8 @@ class digraph(graph):
         with m as head and n as tail :  m -> n
         """
         u, v = edge
-        if not self.has_node(v):
-            raise Exception("Node %s is not there in the graph" % v)
         if (v not in self.node_neighbors[u]):
-            self.node_neighbors[u].append(v)
-            self.set_edge_properties((u, v), label=label, weight=wt)
+            self.node_neighbors[u][v] = wt
         else:
             raise Exception("Edge (%s, %s) already added in the graph" % (u, v))
 
@@ -49,7 +38,7 @@ class digraph(graph):
         u, v = edge
         if not self.has_edge(edge):
             raise Exception("Edge (%s, %s) not an existing edge" % (u, v))
-        self.node_neighbors[u].remove(v)
+        del self.node_neighbors[u][v]
 
     def del_node(self, node):
         """

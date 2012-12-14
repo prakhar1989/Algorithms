@@ -1,7 +1,7 @@
 from collections import deque
 from copy import deepcopy
-import heapq
 from union_find.unionfind import UnionFind
+import heapq
 
 def BFS(gr, s):
     """ Breadth first search 
@@ -232,3 +232,34 @@ def kruskal_MST(gr):
             uf.insert(u, v)
             min_cost += w
     return min_cost
+
+def max_k_clustering(gr, k):
+    sorted_edges = sorted(gr.get_edge_weights())
+    uf = UnionFind()
+    #initialize each node as its cluster
+    for n in gr.nodes(): 
+        uf.insert(n)
+    for (w, (u, v)) in sorted_edges:
+        if uf.count_groups() <= k: 
+            return uf.get_sets()
+        if uf.get_leader(u) != uf.get_leader(v):
+            uf.make_union(uf.get_leader(u), uf.get_leader(v))
+    
+def compute_spacing(c1, c2):
+    min = float('inf')
+    for n in c1:
+        for v in c2:
+            cost = gr.get_edge_weight((n, v))
+            if cost < min:
+                min = cost
+    return min
+
+def get_max_spacing(clusters):
+    min = float('inf')
+    for u in clusters:
+        for v in clusters:
+            if u!= v:
+                spacing = compute_spacing(u,v)
+                if spacing < min:
+                    min = spacing
+    return min
