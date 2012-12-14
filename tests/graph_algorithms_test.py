@@ -126,7 +126,6 @@ class test_graph(unittest.TestCase):
             if v not in gr.nodes():
                 gr.add_node(v)
             gr.add_edge( (u, v), int(w) )
-
         min_cost = kruskal_MST(gr)
         self.assertEqual(min_cost, 39)
 

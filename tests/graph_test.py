@@ -88,24 +88,5 @@ class test_graph(unittest.TestCase):
     def test_weight_for_nonexisting_edge(self):
         self.assertRaises(Exception, self.gr.get_edge_weight, ("a", "c"))
 
-    def test_set_edge_properties(self):
-        self.gr.set_edge_properties(('a', 'b'), label="label")
-        self.assertEqual(self.gr.get_edge_properties(('a', 'b'))["label"], "label")
-
-    def test_add_node_properties_of_existing_node(self):
-        self.gr.add_node_attribute("a", "expensive")
-        self.assertEqual(self.gr.node_attributes("a"), "expensive")
-
-    def test_get_node_properties_of_blank_node(self):
-        self.assertEqual(self.gr.node_attributes("a"), [])
-
-    def test_add_node_attribute_of_non_existing_node(self):
-        self.assertRaises(Exception, self.gr.add_node_attribute, "z")
-
-    def test_clear_node_attributes_method(self):
-        self.gr.add_node_attribute("a", "expensive")
-        self.gr.clear_node_attributes()
-        self.assertEqual(self.gr.node_attributes("a"), [])
-
 if __name__ == "__main__":
     unittest.main()
