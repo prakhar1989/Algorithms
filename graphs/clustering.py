@@ -1,3 +1,8 @@
+import os, sys
+sys.path.append(os.path.join(os.getcwd(), os.path.pardir))
+from graph import graph
+from union_find.unionfind import UnionFind
+
 data = """1 2 6808
 1 3 5250
 1 4 74
@@ -189,10 +194,6 @@ data = """1 2 6808
 18 20 7382
 19 20 1143
 """
-import os, sys
-sys.path.append(os.path.join(os.getcwd(), os.path.pardir))
-from graphs.graph import graph
-from union_find.unionfind import UnionFind
 
 def max_k_clustering(gr, k):
     sorted_edges = sorted(gr.get_edge_weights())

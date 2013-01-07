@@ -26,6 +26,9 @@ Completed
 	- Heapsort
 - Job Scheduling
 - [UnionFind](http://en.wikipedia.org/wiki/Disjoint-set_data_structure) Data Structure
+- Binary Search Tree
+- Kandane's Algorithm
+- Knapsack Problem (0/1 and unbounded)
 
 Tests
 ---
