@@ -9,5 +9,13 @@ def find_max_subarray(numbers):
         max_value = max(max_value, max_till_here[i])
     return max_value
 
+
+def find_max_subarray2(numbers):
+    """ shorter version """
+    max_till_here = [numbers[0]]
+    for n in numbers:
+        max_till_here.append(max(n, max_till_here[-1] + n))
+    return max(max_till_here)
+
 print find_max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]) # 6
 print find_max_subarray([ -1, 3, -5, 4, 6, -1, 2, -7, 13, -3 ]) # 17

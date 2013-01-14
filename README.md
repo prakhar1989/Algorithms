@@ -1,7 +1,7 @@
 Algos in Python
 ======
 
-Implementation for the algorithms and datastructures taught in [CS161](http://openclassroom.stanford.edu/MainFolder/CoursePage.php?course=IntroToAlgorithms), in Python
+Implementations of a few algorithms and datastructures for fun and profit!
 
 Completed
 ---
@@ -20,6 +20,9 @@ Completed
     - Prim's Minimum Cost Spanning Tree - O(mlogn)
     - Kruskal's Minimum Spanning Tree - O(mlogn)
     - Max k Clustering
+    - Bellman Ford
+    - Floyd Warshall
+    - Johnson's Algorithm
 - Heap datastructure
 	- Max heaps
 	- Min heaps (priority queue)
