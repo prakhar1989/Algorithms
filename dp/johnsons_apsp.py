@@ -1,3 +1,5 @@
+""" Johnson's algorithm for all-pairs shortest path problem.
+Reimplemented Bellman-Ford and Dijkstra's for clarity"""
 from heapq import heappush, heappop
 from datetime import datetime
 from copy import deepcopy
