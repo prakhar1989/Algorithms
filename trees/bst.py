@@ -39,12 +39,10 @@ class BinarySearchTree(object):
                 node = node.left
         if parent.value > val:
             parent.left = Node(val)
-            self.len += 1
-            return
-        parent.right = Node(val)
+        else:
+            parent.right = Node(val)
         self.len += 1
         return
-
 
     def remove(self, k):
         """ remove the value and the key k """
