@@ -32,6 +32,8 @@ Completed
 - Binary Search Tree
 - Kandane's Algorithm
 - Knapsack Problem (0/1 and unbounded)
+- Prefix Tries
+
 
 Tests
 ---
