@@ -90,7 +90,6 @@ def start_with_prefix(prefix, trie):
             q.extend(curr_branch[1:])
     return prefix_list
 
-
 if __name__ == "__main__":
     trie = [[]]
     states = """
