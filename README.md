@@ -33,6 +33,10 @@ Completed
 - Kandane's Algorithm
 - Knapsack Problem (0/1 and unbounded)
 - Prefix Tries
+- Stack ADT (with example problems)
+  - String Reverse
+  - Parenthesis Matching
+  - Infix to Postfix
 
 
 Tests

@@ -41,7 +41,6 @@ def match_paren(parens):
                 return False
     return stack.isEmpty()
 
-
 def infix_to_postfix(infixexpr):
     prec = { '+': 2, '-': 2, '*': 3, '/': 3,'(': 1 } # denoting precedence
     operator_stack = Stack()
