@@ -7,6 +7,7 @@ Completed
 ---
 - Karatsuba Multiplication
 - Basic Sorting
+- Rabin-Miller primality test
 - Counting Inversions in an array
 - Selecting ith order statistic in an array
 - Graph datastructure (directed & undirected)
