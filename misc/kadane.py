@@ -12,8 +12,10 @@ def find_max_subarray(numbers):
 
 def find_max_subarray2(numbers):
     """ shorter version """
-    max_till_here = [0]
-    for n in numbers:
+    if len(numbers) == 0:
+        return 0
+    max_till_here = [numbers[0]]
+    for n in numbers[1:]:
         max_till_here.append(max(n, max_till_here[-1] + n))
     return max(max_till_here)
 
