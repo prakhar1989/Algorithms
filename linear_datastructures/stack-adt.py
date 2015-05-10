@@ -17,7 +17,7 @@ class Stack(object):
 
     def top(self):
         if self.isEmpty(): return None
-        return self.items[len(self.items)-1]
+        return self.items[-1]
 
 def string_reverse(s):
     stack = Stack()
