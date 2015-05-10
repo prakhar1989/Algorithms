@@ -106,6 +106,8 @@ class BinarySearchTree(object):
                     node = node.right
                 else:
                     node = node.left
+            if node.value == value:
+              return
             if parent.value > value:
                 parent.left = new_node
             else:
