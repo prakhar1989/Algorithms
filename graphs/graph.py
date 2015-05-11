@@ -38,7 +38,7 @@ class graph(object):
         """
         return node in self.node_neighbors
 
-    def add_edge(self, edge, wt=1, label=""):
+    def add_edge(self, edge, wt=self.DEFAULT_WEIGHT, label=""):
         """
         Add an edge to the graph connecting two nodes.
         An edge, here, is a pair of node like C(m, n) or a tuple
