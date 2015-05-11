@@ -38,7 +38,7 @@ class graph(object):
         """
         return node in self.node_neighbors
 
-    def add_edge(self, edge, wt=1, label=""):
+    def add_edge(self, edge, wt=DEFAULT_WEIGHT, label=""):
         """
         Add an edge to the graph connecting two nodes.
         An edge, here, is a pair of node like C(m, n) or a tuple
@@ -61,7 +61,7 @@ class graph(object):
         """
         Returns a list of nodes in the graph
         """
-        return list(self.node_neighbors.keys())
+        return self.node_neighbors.keys()
 
     def has_edge(self, edge):
         """
@@ -69,9 +69,7 @@ class graph(object):
         graph. An edge, here, is a pair of node like C(m, n) or a tuple
         """
         u, v = edge
-        if v not in self.node_neighbors[u]:
-            return False
-        return True
+        return v in self.node_neighbors.get(u, [])
 
     def neighbors(self, node):
         """
@@ -115,14 +113,16 @@ class graph(object):
         """
         edge_list = []
         for node in self.nodes():
-            for each in self.neighbors(node):
-                edge_list.append((node, each))
+            edges = [(node, each) for each in self.neighbors(node)]
+            edge_list.extend(edges)
         return edge_list
 
     # Methods for setting properties on nodes and edges
     def set_edge_weight(self, edge, wt):
         """Set the weight of the edge """
         u, v = edge
+        if not self.has_edge(edge):
+            raise Exception("Edge (%s, %s) not an existing edge" % (u, v))
         self.node_neighbors[u][v] = wt
         if u != v:
             self.node_neighbors[v][u] = wt
@@ -140,10 +140,7 @@ class graph(object):
         unique_list = {}
         for u in self.nodes():
             for v in self.neighbors(u):
-                if not  unique_list.get(v) or u not in unique_list.get(v):
+                if u not in unique_list.get(v, set()):
                     edge_list.append((self.node_neighbors[u][v], (u, v)))
-                    if u not in unique_list:
-                        unique_list[u] = [v]
-                    else:
-                        unique_list[u].append(v)
+                    unique_list.setdefault(u, set()).add(v)
         return edge_list
