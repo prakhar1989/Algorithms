@@ -113,8 +113,8 @@ class graph(object):
         """
         edge_list = []
         for node in self.nodes():
-            for each in self.neighbors(node):
-                edge_list.append((node, each))
+            edges = [(node, each) for each in self.neighbors(node)]
+            edge_list.extend(edges)
         return edge_list
 
     # Methods for setting properties on nodes and edges
