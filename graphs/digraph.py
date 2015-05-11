@@ -18,7 +18,7 @@ class digraph(graph):
     def __str__(self):
         return "Directed Graph \nNodes: %s \nEdges: %s" % (self.nodes(), self.edges())
 
-    def add_edge(self, edge, wt=1, label=""):
+    def add_edge(self, edge, wt=DEFAULT_WEIGHT, label=""):
         """
         Add an edge to the graph connecting two nodes.
         An edge, here, is a pair of node like C(m, n) or a tuple
