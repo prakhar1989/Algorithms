@@ -61,7 +61,7 @@ class graph(object):
         """
         Returns a list of nodes in the graph
         """
-        return list(self.node_neighbors.keys())
+        return self.node_neighbors.keys()
 
     def has_edge(self, edge):
         """
