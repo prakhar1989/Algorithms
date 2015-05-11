@@ -142,5 +142,5 @@ class graph(object):
             for v in self.neighbors(u):
                 if u not in unique_list.get(v, []):
                     edge_list.append((self.node_neighbors[u][v], (u, v)))
-                    unique_list.setdefault(u, [v]).append(v)
+                    unique_list.setdefault(u, []).append(v)
         return edge_list
