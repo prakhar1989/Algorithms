@@ -121,6 +121,8 @@ class graph(object):
     def set_edge_weight(self, edge, wt):
         """Set the weight of the edge """
         u, v = edge
+        if not self.has_edge(edge):
+            raise Exception("Edge (%s, %s) not an existing edge" % (u, v))
         self.node_neighbors[u][v] = wt
         if u != v:
             self.node_neighbors[v][u] = wt
