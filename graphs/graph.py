@@ -69,9 +69,7 @@ class graph(object):
         graph. An edge, here, is a pair of node like C(m, n) or a tuple
         """
         u, v = edge
-        if v not in self.node_neighbors[u]:
-            return False
-        return True
+        return v in self.node_neighbors.get(u, [])
 
     def neighbors(self, node):
         """
