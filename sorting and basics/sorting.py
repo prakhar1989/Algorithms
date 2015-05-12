@@ -82,8 +82,9 @@ def insertionsort(a):
         item = a[i]
         j = i
         while j > 0 and a[j-1] > item:
-            a[j],a[j-1] = a[j-1],a[j]
+            a[j] = a[j-1]
             j -= 1
+        a[j] = item
     return a
 
 if __name__ == "__main__":
