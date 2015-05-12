@@ -57,7 +57,7 @@ def undirected_connected_components(gr):
 
 def DFS(gr, s):
     """ Depth first search wrapper """
-    path = []
+    path = set([])
     depth_first_search(gr, s, path)
     return path
 
@@ -65,7 +65,7 @@ def depth_first_search(gr, s, path):
     """ Depth first search 
     Returns a list of nodes "findable" from s """
     if s in path: return False
-    path.append(s)
+    path.add(s)
     for each in gr.neighbors(s):
         if each not in path:
             depth_first_search(gr, each, path)
@@ -144,7 +144,8 @@ def shortest_path(digr, s):
     from s using Dijkstra's algorithm in O(mlogn) time. Uses heaps
     for super fast implementation """
     nodes_explored = set([s])
-    nodes_unexplored = DFS(digr, s)[1:] # all accessible nodes from s
+    nodes_unexplored = DFS(digr, s) # all accessible nodes from s
+    nodes_unexplored.remove(s)
     dist = {s:0}
     node_heap = []
 
