@@ -9,10 +9,8 @@ def mergesort(arr):
     """
     n = len(arr)
     if n <= 1: return arr
-    a1 = arr[:n/2]
-    a2 = arr[n/2:]
-    a1 = mergesort(a1)
-    a2 = mergesort(a2)
+    a1 = mergesort(arr[:n/2])
+    a2 = mergesort(arr[n/2:])
     return merge(a1, a2)
 
 def merge(arr_a, arr_b):
@@ -25,8 +23,8 @@ def merge(arr_a, arr_b):
         else:
             arr_c.append(arr_b[j])
             j += 1
-    if arr_a[i:]: arr_c += arr_a[i:]
-    if arr_b[j:]: arr_c += arr_b[j:]
+    if arr_a[i:]: arr_c.extend(arr_a[i:])
+    if arr_b[j:]: arr_c.extend(arr_b[j:])
     return arr_c
 
 def quicksort(a):
