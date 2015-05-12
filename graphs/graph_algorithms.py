@@ -8,13 +8,13 @@ def BFS(gr, s):
     Returns a list of nodes that are "findable" from s """
     if not gr.has_node(s):
         raise Exception("Node %s not in graph" % s)
-    nodes_explored = [s]
+    nodes_explored = set([s])
     q = deque([s])
     while len(q)!=0:
         node = q.popleft()
         for each in gr.neighbors(node):
             if each not in nodes_explored:
-                nodes_explored.append(each)
+                nodes_explored.add(each)
                 q.append(each)
     return nodes_explored
 
@@ -28,7 +28,7 @@ def shortest_hops(gr, s):
     else:
         dist = {}
         q = deque([s])
-        nodes_explored = [s]
+        nodes_explored = set([s])
         for n in gr.nodes():
             if n == s: dist[n] = 0
             else: dist[n] = float('inf')
@@ -36,7 +36,7 @@ def shortest_hops(gr, s):
             node = q.popleft()
             for each in gr.neighbors(node):
                 if each not in nodes_explored:
-                    nodes_explored.append(each)
+                    nodes_explored.add(each)
                     q.append(each)
                     dist[each] = dist[node] + 1
         return dist
@@ -121,7 +121,7 @@ def outer_dfs(digr, node, nodes_explored, path):
 def DFS_loop(digr):
     """ Core DFS loop used to find strongly connected components
     in a directed graph """
-    node_explored = [] # list for keeping track of nodes explored
+    node_explored = set([]) # list for keeping track of nodes explored
     finishing_times = [] # list for adding nodes based on their finishing times
     for node in digr.nodes():
         if node not in node_explored:
@@ -131,7 +131,7 @@ def DFS_loop(digr):
 
 def inner_DFS(digr, node, node_explored, finishing_times):
     """ Inner DFS used in DFS loop method """
-    node_explored.append(node) # mark explored
+    node_explored.add(node) # mark explored
     for each in digr.neighbors(node):
         if each not in node_explored:
             inner_DFS(digr, each, node_explored, finishing_times)
@@ -143,7 +143,7 @@ def shortest_path(digr, s):
     """ Finds the shortest path from s to every other vertex findable
     from s using Dijkstra's algorithm in O(mlogn) time. Uses heaps
     for super fast implementation """
-    nodes_explored = [s]
+    nodes_explored = set([s])
     nodes_unexplored = DFS(digr, s)[1:] # all accessible nodes from s
     dist = {s:0}
     node_heap = []
@@ -155,7 +155,7 @@ def shortest_path(digr, s):
     while len(node_heap) > 0:
         min_dist, nearest_node = heapq.heappop(node_heap)
         dist[nearest_node] = min_dist
-        nodes_explored.append(nearest_node)
+        nodes_explored.add(nearest_node)
         nodes_unexplored.remove(nearest_node)
 
         # recompute keys for just popped node
@@ -183,7 +183,7 @@ def minimum_spanning_tree(gr):
     cost spanning tree in a undirected connected graph.
     Works only with undirected and connected graphs """
     s = gr.nodes()[0] 
-    nodes_explored = [s]
+    nodes_explored = set([s])
     nodes_unexplored = gr.nodes()
     nodes_unexplored.remove(s)
     min_cost, node_heap = 0, []
@@ -197,7 +197,7 @@ def minimum_spanning_tree(gr):
         # adds the cheapest to "explored"
         node_cost, min_node = heapq.heappop(node_heap)
         min_cost += node_cost
-        nodes_explored.append(min_node)
+        nodes_explored.add(min_node)
         nodes_unexplored.remove(min_node)
 
         # recompute keys for neighbors of deleted node
