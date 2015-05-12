@@ -46,13 +46,13 @@ def undirected_connected_components(gr):
     in an undirected graph """
     if gr.DIRECTED:
         raise Exception("This method works only with a undirected graph")
-    explored = []
+    explored = set([])
     con_components = []
     for node in gr.nodes():
         if node not in explored:
             reachable_nodes = BFS(gr, node)
             con_components.append(reachable_nodes)
-            explored += reachable_nodes
+            explored |= reachable_nodes
     return con_components
 
 def DFS(gr, s):
