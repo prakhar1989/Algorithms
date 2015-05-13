@@ -59,7 +59,7 @@ class UnionFind(object):
     def count_groups(self):
         """ returns a count of the number of groups/sets in the
         data structure"""
-        return len(self.group.keys())
+        return len(self.group)
 
     def make_union(self, leadera, leaderb):
         """ takes union of two sets with leaders, leadera and leaderb
