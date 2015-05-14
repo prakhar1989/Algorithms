@@ -11,7 +11,7 @@ class minheap(object):
         self.heap = []
         if nums:
             self.build_heap(nums)
-    
+
     def __str__(self):
         return "Min-heap with %s items" % (len(self.heap))
 
@@ -19,7 +19,7 @@ class minheap(object):
         return len(self.heap)
 
     def height(self):
-        return math.ceil(math.log(len(self.heap))/math.log(2))
+        return math.ceil(math.log(len(self.heap)) / math.log(2))
 
     def is_leaf(self, i):
         """ returns True if i is a leaf node """
@@ -29,18 +29,14 @@ class minheap(object):
         if i == 0:
             return []
         elif i % 2 != 0: # odd
-            return (i-1)/2
-        return int(math.floor((i-1)/2))
+            return (i - 1) / 2
+        return (i - 2) / 2
 
     def leftchild(self, i):
-        if not self.is_leaf(i):
-            return 2*i+1
-        return []
+        return 2 * i + 1
 
     def rightchild(self, i):
-        if not self.is_leaf(i):
-            return 2*i+2
-        return []
+        return 2 * i + 2
 
     def heapify(self, i):
         l = self.leftchild(i)
@@ -60,8 +56,7 @@ class minheap(object):
         self.heap = elem[:]
         last_leaf = int(math.ceil( (len(self.heap)- 2) / 2))
         for i in range(last_leaf, -1, -1):
-            self.heapify(i)
-        
+            self.heapify(i)        
 
     def heappush(self, x):
         """ Adds a new item x in the heap"""
