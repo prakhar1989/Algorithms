@@ -27,7 +27,7 @@ class minheap(object):
 
     def parent(self, i):
         if i == 0:
-            return []
+            return -1
         elif i % 2 != 0: # odd
             return (i - 1) / 2
         return (i - 2) / 2
@@ -54,16 +54,16 @@ class minheap(object):
         """ transforms a list of elements into a heap
         in linear time """
         self.heap = elem[:]
-        last_leaf = int(math.ceil( (len(self.heap)- 2) / 2))
+        last_leaf = self.parent(len(self.heap))
         for i in range(last_leaf, -1, -1):
-            self.heapify(i)        
+            self.heapify(i)
 
     def heappush(self, x):
         """ Adds a new item x in the heap"""
         i = len(self.heap)
         self.heap.append(x)
         parent = self.parent(i)
-        while parent != [] and self.heap[i] < self.heap[parent]:
+        while parent != -1 and self.heap[i] < self.heap[parent]:
             self.heap[i], self.heap[parent] = self.heap[parent], self.heap[i]
             i = parent
             parent = self.parent(i)
