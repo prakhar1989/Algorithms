@@ -23,7 +23,7 @@ class minheap(object):
 
     def is_leaf(self, i):
         """ returns True if i is a leaf node """
-        return i > int(math.ceil( (len(self.heap)- 2) / 2))
+        return i > int(math.ceil((len(self.heap) - 2) / 2.0))
 
     def parent(self, i):
         if i == 0:
