@@ -1,19 +1,21 @@
-""" Tries in python 
+""" Tries in python
 Methods -  insert_key(k, v)
            has_key(k)
            retrie_val(k)
            start_with_prefix(prefix)
 """
-# HELPERS #
 
 
 def _get_child_branches(trie):
+    """
+    Helper method for getting branches
+    """
     return trie[1:]
 
 
 def _get_child_branch(trie, c):
     """
-    Find matching branch with the character
+    Get branch matching the character
     """
     for branch in _get_child_branches(trie):
         if branch[0] == c:
@@ -23,6 +25,9 @@ def _get_child_branch(trie, c):
 
 
 def _retrive_branch(k, trie):
+    """
+    Get branch matching the key word
+    """
     if not k:
         return None
 
@@ -48,13 +53,12 @@ def _get_bucket_key(bucket):
 
     return bucket[1][0]
 
-# HAS_KEY #
-
 
 def has_key(k, trie):
+    """
+    Check if trie contain the key word
+    """
     return _retrive_branch(k, trie) is not None
-
-# RETRIE_VAL
 
 
 def retrie_val(k, trie):
@@ -66,6 +70,9 @@ def retrie_val(k, trie):
 
 
 def insert_key(key, v, trie):
+    """
+    Insert a (key, value) pair into trie
+    """
     if not key or has_key(key, trie):
         return
 
@@ -81,6 +88,9 @@ def insert_key(key, v, trie):
 
 
 def start_with_prefix(prefix, trie):
+    """
+    Find words start with prefix
+    """
     branch = _retrive_branch(prefix, trie)
     if not branch:
         return []
@@ -93,6 +103,7 @@ def start_with_prefix(prefix, trie):
             prefix_list.append(_get_bucket_key(curr_branch))
         else:
             q.extend(curr_branch[1:])
+
     return prefix_list
 
 if __name__ == "__main__":
