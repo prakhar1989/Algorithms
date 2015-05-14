@@ -11,7 +11,7 @@ class minheap(object):
         self.heap = []
         if nums:
             self.build_heap(nums)
-    
+
     def __str__(self):
         return "Min-heap with %s items" % (len(self.heap))
 
@@ -19,28 +19,24 @@ class minheap(object):
         return len(self.heap)
 
     def height(self):
-        return math.ceil(math.log(len(self.heap))/math.log(2))
+        return math.ceil(math.log(len(self.heap)) / math.log(2))
 
     def is_leaf(self, i):
         """ returns True if i is a leaf node """
-        return i > int(math.ceil( (len(self.heap)- 2) / 2))
+        return i > int(math.ceil((len(self.heap) - 2) / 2.0))
 
     def parent(self, i):
         if i == 0:
-            return []
+            return -1
         elif i % 2 != 0: # odd
-            return (i-1)/2
-        return int(math.floor((i-1)/2))
+            return (i - 1) / 2
+        return (i - 2) / 2
 
     def leftchild(self, i):
-        if not self.is_leaf(i):
-            return 2*i+1
-        return []
+        return 2 * i + 1
 
     def rightchild(self, i):
-        if not self.is_leaf(i):
-            return 2*i+2
-        return []
+        return 2 * i + 2
 
     def heapify(self, i):
         l = self.leftchild(i)
@@ -58,17 +54,16 @@ class minheap(object):
         """ transforms a list of elements into a heap
         in linear time """
         self.heap = elem[:]
-        last_leaf = int(math.ceil( (len(self.heap)- 2) / 2))
+        last_leaf = self.parent(len(self.heap))
         for i in range(last_leaf, -1, -1):
             self.heapify(i)
-        
 
     def heappush(self, x):
         """ Adds a new item x in the heap"""
         i = len(self.heap)
         self.heap.append(x)
         parent = self.parent(i)
-        while parent != [] and self.heap[i] < self.heap[parent]:
+        while parent != -1 and self.heap[i] < self.heap[parent]:
             self.heap[i], self.heap[parent] = self.heap[parent], self.heap[i]
             i = parent
             parent = self.parent(i)
