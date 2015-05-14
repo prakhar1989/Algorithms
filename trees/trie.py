@@ -5,17 +5,25 @@ Methods -  insert_key(k, v)
            start_with_prefix(prefix)
 """
 # HELPERS #
+
+
 def _get_child_branches(tr):
     return tr[1:]
 
+
 def _get_child_branch(tr, c):
+    """
+    Find matching branch with the character
+    """
     for branch in _get_child_branches(tr):
         if branch[0] == c:
             return branch
+
     return None
 
+
 def _retrive_branch(k, trie_list):
-    if k == "":
+    if not k:
         return None
     tr = trie_list
     for c in k:
@@ -23,46 +31,48 @@ def _retrive_branch(k, trie_list):
         if not child_branch:
             return None
         tr = child_branch
+
     return tr
+
 
 def _is_trie_bucket(bucket):
     if len(bucket) != 2:
         return False
-    if type(bucket[1]) is tuple:
-        return True
+
+    return type(bucket[1]) is tuple
+
 
 def _get_bucket_key(bucket):
     if not _is_trie_bucket(bucket):
         return None
-    return bucket[1][0] 
+
+    return bucket[1][0]
 
 # HAS_KEY #
+
+
 def has_key(k, tr):
-    if k == "":
-        return None
-    key_tuple = _retrive_branch(k, tr)
-    if not key_tuple:
-        return False
-    return True
+    return _retrive_branch(k, tr) is not None
 
 # RETRIE_VAL
+
+
 def retrie_val(k, tr):
-    if k == "":
-        return None
     key_tuple = _retrive_branch(k, tr)
     if not key_tuple:
         return None
+
     return key_tuple[1]
 
 
 def insert_key(key, v, trie_list):
-    if key == "" or has_key(key, trie_list):
+    if not key or has_key(key, trie_list):
         return
 
     tr = trie_list
     for char in key:
         branch = _get_child_branch(tr, char)
-        if branch == None:
+        if not branch:
             new_branch = [char]
             tr.append(new_branch)
             tr = new_branch
@@ -137,7 +147,7 @@ if __name__ == "__main__":
             Washington
             West Virginia
             Wisconsin
-            Wyoming"""    
+            Wyoming"""
     states_list = [w.strip().lower() for w in states.splitlines() if w]
     for state in states_list:
         insert_key(state, True, trie)
