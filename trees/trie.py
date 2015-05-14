@@ -7,32 +7,32 @@ Methods -  insert_key(k, v)
 # HELPERS #
 
 
-def _get_child_branches(tr):
-    return tr[1:]
+def _get_child_branches(trie):
+    return trie[1:]
 
 
-def _get_child_branch(tr, c):
+def _get_child_branch(trie, c):
     """
     Find matching branch with the character
     """
-    for branch in _get_child_branches(tr):
+    for branch in _get_child_branches(trie):
         if branch[0] == c:
             return branch
 
     return None
 
 
-def _retrive_branch(k, trie_list):
+def _retrive_branch(k, trie):
     if not k:
         return None
-    tr = trie_list
+
     for c in k:
-        child_branch = _get_child_branch(tr, c)
+        child_branch = _get_child_branch(trie, c)
         if not child_branch:
             return None
-        tr = child_branch
+        trie = child_branch
 
-    return tr
+    return trie
 
 
 def _is_trie_bucket(bucket):
@@ -51,40 +51,40 @@ def _get_bucket_key(bucket):
 # HAS_KEY #
 
 
-def has_key(k, tr):
-    return _retrive_branch(k, tr) is not None
+def has_key(k, trie):
+    return _retrive_branch(k, trie) is not None
 
 # RETRIE_VAL
 
 
-def retrie_val(k, tr):
-    key_tuple = _retrive_branch(k, tr)
+def retrie_val(k, trie):
+    key_tuple = _retrive_branch(k, trie)
     if not key_tuple:
         return None
 
     return key_tuple[1]
 
 
-def insert_key(key, v, trie_list):
-    if not key or has_key(key, trie_list):
+def insert_key(key, v, trie):
+    if not key or has_key(key, trie):
         return
 
-    tr = trie_list
     for char in key:
-        branch = _get_child_branch(tr, char)
+        branch = _get_child_branch(trie, char)
         if not branch:
             new_branch = [char]
-            tr.append(new_branch)
-            tr = new_branch
+            trie.append(new_branch)
+            trie = new_branch
         else:
-            tr = branch
-    tr.append((key, v))
+            trie = branch
+    trie.append((key, v))
 
 
 def start_with_prefix(prefix, trie):
     branch = _retrive_branch(prefix, trie)
     if not branch:
         return []
+
     prefix_list = []
     q = branch[1:]
     while q:
