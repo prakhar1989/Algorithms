@@ -56,22 +56,19 @@ def retrie_val(k, tr):
 
 
 def insert_key(key, v, trie_list):
-    if key == "":
-        return None
-    elif has_key(key, trie_list):
-        return None
-    else:
-        tr = trie_list
-        for char in key:
-            branch = _get_child_branch(tr, char)
-            if branch == None:
-                new_branch = [char]
-                tr.append(new_branch)
-                tr = new_branch
-            else:
-                tr = branch
-        tr.append((key, v))
-        return None
+    if key == "" or has_key(key, trie_list):
+        return
+
+    tr = trie_list
+    for char in key:
+        branch = _get_child_branch(tr, char)
+        if branch == None:
+            new_branch = [char]
+            tr.append(new_branch)
+            tr = new_branch
+        else:
+            tr = branch
+    tr.append((key, v))
 
 
 def start_with_prefix(prefix, trie):
