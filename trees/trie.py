@@ -6,8 +6,6 @@ Methods -  insert_key(k, v)
 """
 # HELPERS #
 def _get_child_branches(tr):
-    if tr == []:
-        return []
     return tr[1:]
 
 def _get_child_branch(tr, c):
