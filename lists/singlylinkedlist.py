@@ -6,12 +6,11 @@ class Node(object):
     def __repr__(self):
         return str(self.data)
 
-class LinkedList(object):
+class SinglyLinkedList(object):
     def __init__(self, iterable=[]):
         self.head = None
         self.size = 0
-        for item in iterable:
-            self.append(item)
+        for item in iterable: self.append(item)
 
     def __repr__(self):
         (current, nodes) = self.head, []
@@ -66,7 +65,15 @@ class LinkedList(object):
                 prev = tmp
                 tmp = tmp.next
         if found:
+            self.size -= 1
             if prev == None:
                 self.head = self.head.next
             else:
                 prev.next = tmp.next
+
+if __name__ == "__main__":
+    list1 = SinglyLinkedList(range(0, 100, 10))
+    print list1 # testing repr
+    print 50 in list1, 110 not in list1 # testing contains
+    list1.delete(50) # testing delete
+    print len(list1) == 9, 50 not in list1 # testing size
