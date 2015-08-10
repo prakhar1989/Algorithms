@@ -1,6 +1,16 @@
-"""Implementation of Sieve of Eratosthenes algorithm to generate all the primes upto N."""
+"""
 
-"""Reference : https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes"""
+Implementation of Sieve of Eratosthenes algorithm to generate all the primes upto N.
+
+Reference : https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+
+Algorithm :
+
+* We have a list of numbers from 1 to N.
+* Initially, all the numbers are marked as primes.
+* We go to every prime number in the list (<= N ^ 1/2) and mark all the multiples of this prime number which are bigger than the number itself as non-primes.
+
+"""
 
 from math import sqrt,ceil
 
