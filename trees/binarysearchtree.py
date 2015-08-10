@@ -12,14 +12,13 @@ class Node(object):
     def __repr__(self):
         return "Node with value - %s" % self.value
 
-
 class BinarySearchTree(object):
     def __init__(self):
         self.root = None
         self.len = 0
 
     def __len__(self):
-        return self.len 
+        return self.len
 
     def is_empty(self):
         return self.root == None
@@ -41,7 +40,7 @@ class BinarySearchTree(object):
             self._postorder(node.left, values)
             self._postorder(node.right, values)
             values.append(node.value)
-            
+
     def values(self, reverse = False, order="in"):
         values = []
         if order == "in":
@@ -55,7 +54,7 @@ class BinarySearchTree(object):
         return values
 
     def _search(self, root, value):
-        if not root or root.value == value: 
+        if not root or root.value == value:
             return root
         if value < root.value:
             return self._search(root.left, value)
@@ -80,11 +79,11 @@ class BinarySearchTree(object):
     def get_max(self):
         """ returns the element with the maximum value """
         return self._extremes(self.root, find_min=False)
-    
+
     def successor(self, value):
         """ returns the successor of the element with value - value"""
         node = self.find_element(value)
-        if not node: 
+        if not node:
             return None
         if node.right:
             return self._extremes(node.right, find_min=True)
@@ -115,14 +114,14 @@ class BinarySearchTree(object):
             new_node.parent = parent
         self.len += 1
         return
-    
+
     def delete(self, value):
         """ deletes a node from tree with value - value """
         node = self.find_element(value)
         if not node:
             return None
         if not node.left or not node.right:
-            node_spliced = node 
+            node_spliced = node
         else:
             node_spliced = self.successor(node.value)
         if node_spliced.left:
@@ -137,7 +136,7 @@ class BinarySearchTree(object):
             node_spliced.parent.left = temp_node
         else:
             node_spliced.parent.right = temp_node
-        
+
         if node != node_spliced:
             node.value = node_spliced.value
         return node_spliced
