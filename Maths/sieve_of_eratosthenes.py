@@ -1,6 +1,6 @@
 """Implementation of Sieve of Eratosthenes algorithm to generate all the primes upto N."""
 
-https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+"""Reference : https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes"""
 
 from math import sqrt,ceil
 
