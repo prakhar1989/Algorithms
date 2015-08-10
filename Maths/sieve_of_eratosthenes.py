@@ -9,11 +9,11 @@ def sieve_of_eratosthenes(n):
     prime_array = []
     upper_bound = ceil(sqrt(n))
     for i in range(2,upper_bound):
-        if bool_array[i] == True:
+        if bool_array[i]:
             for j in range(i*i,n+1,i):
                 bool_array[j] = False
     for i in range(n+1):
-        if bool_array[i] == True:
+        if bool_array[i]:
             prime_array.append(i)
     return prime_array
 
