@@ -1,4 +1,9 @@
 """
+Problem: The maximum subarray problem is the task of finding the
+contiguous subarray within a one-dimensional array of numbers
+(containing at least one positive number) which has the largest sum.
+
+Solution:
 The recurrence relation that we solve at each step is the following -
 
 Let S[i] = be the max value contigous subsequence till the ith element
