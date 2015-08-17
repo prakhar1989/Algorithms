@@ -4,7 +4,7 @@ class graph(object):
 
     methods: add_edge, add_edges, add_node, add_nodes, has_node,
     has_edge, nodes, edges, neighbors, del_node, del_edge, node_order,
-    set_edge_weight, get_edge_weight, 
+    set_edge_weight, get_edge_weight
     """
 
     DEFAULT_WEIGHT = 1

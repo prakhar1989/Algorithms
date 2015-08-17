@@ -63,7 +63,7 @@ class test_graph(unittest.TestCase):
         dag.add_edges([("a", "b"), ("a", "c"), ("a", "e"), ("d", "a")])
         dag.add_edges([("g", "b"), ("g", "f"), ("f", "e"), ("h", "f"), ("h", "a")])
         order = {o[0]: o[1] for o in topological_ordering(dag)}
-        self.assertEqual(sum([order[u] < order[v] for (u, v) in 
+        self.assertEqual(sum([order[u] < order[v] for (u, v) in
                          dag.edges()]), len(dag.edges())) # all comparisons are True
 
     def test_directed_connected_components(self):
@@ -86,7 +86,7 @@ class test_graph(unittest.TestCase):
         digr.add_nodes(["a", "b", "c", "d", "e", "f"])
         digr.add_edge(("a", "b"), 7)
         digr.add_edge(("a", "c"), 9)
-        digr.add_edge(("a", "f"), 14) 
+        digr.add_edge(("a", "f"), 14)
         digr.add_edge(("f", "e"), 9)
         digr.add_edge(("c", "f"), 2)
         digr.add_edge(("c", "d"), 11)
@@ -101,33 +101,24 @@ class test_graph(unittest.TestCase):
         self.assertEqual(shortest_path(digr, "a")["f"], 11)
 
     def test_prims_minimum_spanning_tree(self):
-        lines = [l for l in open("tests/edges.txt")]
-        lines = lines[1:]
-        edges = (l.split() for l in lines)
         gr = graph()
-        for (u, v, w) in edges:
-            if u not in gr.nodes():
-                gr.add_node(u)
-            if v not in gr.nodes():
-                gr.add_node(v)
-            gr.add_edge( (u, v), int(w) )
-
+        gr.add_nodes(["a", "b", "c", "d"])
+        gr.add_edge(("a", "b"), 4)
+        gr.add_edge(("b", "c"), 3)
+        gr.add_edge(("a", "c"), 1)
+        gr.add_edge(("c", "d"), 2)
         min_cost = minimum_spanning_tree(gr)
-        self.assertEqual(min_cost, 39)
+        self.assertEqual(min_cost, 6)
 
     def test_kruskals_minimum_spanning_tree(self):
-        lines = [l for l in open("tests/edges.txt")]
-        lines = lines[1:]
-        edges = (l.split() for l in lines)
         gr = graph()
-        for (u, v, w) in edges:
-            if u not in gr.nodes():
-                gr.add_node(u)
-            if v not in gr.nodes():
-                gr.add_node(v)
-            gr.add_edge( (u, v), int(w) )
+        gr.add_nodes(["a", "b", "c", "d"])
+        gr.add_edge(("a", "b"), 4)
+        gr.add_edge(("b", "c"), 3)
+        gr.add_edge(("a", "c"), 1)
+        gr.add_edge(("c", "d"), 2)
         min_cost = kruskal_MST(gr)
-        self.assertEqual(min_cost, 39)
+        self.assertEqual(min_cost, 6)
 
 if __name__ == "__main__":
     unittest.main()
