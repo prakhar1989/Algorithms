@@ -1,13 +1,12 @@
 """
 Fisher-Yates shuffle algorithm implemented in Python.
 
-
 Reference :
 https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 http://www.geeksforgeeks.org/shuffle-a-given-array/
 
 Algorithm:
-For all N indices of list, swap the element at a given index i with a random number 0 <= j < i.
+For all N indices of list, swap the element at a given index i with the element at a random index j where 0 <= j <= i.
 """
 
 from random import randint
