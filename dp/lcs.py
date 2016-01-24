@@ -29,6 +29,4 @@ def longest_common_subsequence(s1, s2):
     return (len(sequence), sequence[::-1])
 
 if __name__ == "__main__":
-    assert longest_common_subsequence("ABCD", "BBDABXYDCCAD") == (4, "ABCD")
-    assert longest_common_subsequence("BANANA", "ATANA") == (4, "AANA")
-    assert longest_common_subsequence("ABCDEFG", "BDGK") == (3, "BDG")
+    print(longest_common_subsequence("ABCXYZ","ACBCXZ"))
