@@ -8,6 +8,7 @@ Completed
 - Karatsuba Multiplication
 - Basic Sorting
 - Rabin-Miller primality test
+- Sieve of Eratosthenes for prime numbers
 - Binary Search
 - Counting Inversions in an array
 - Selecting ith order statistic in an array
@@ -34,6 +35,8 @@ Completed
 - Binary Search Tree
 - Kandane's Algorithm
 - Knapsack Problem (0/1 and unbounded)
+- Longest Increasing Subsequence
+- Longest Common Subsequence
 - Prefix Tries
 - Stack ADT (with example problems)
   - String Reverse
