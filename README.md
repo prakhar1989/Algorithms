@@ -35,6 +35,8 @@ Completed
 - Binary Search Tree
 - Kandane's Algorithm
 - Knapsack Problem (0/1 and unbounded)
+- Longest Increasing Subsequence
+- Longest Common Subsequence
 - Prefix Tries
 - Stack ADT (with example problems)
   - String Reverse
