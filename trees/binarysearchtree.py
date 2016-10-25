@@ -100,13 +100,13 @@ class BinarySearchTree(object):
         else:
             node = self.root
             while node and node.value != value:
+                if node.value == value:
+                  return
                 parent = node
                 if node.value < value:
                     node = node.right
                 else:
                     node = node.left
-            if node.value == value:
-              return
             if parent.value > value:
                 parent.left = new_node
             else:
