@@ -1,4 +1,4 @@
-Algos in Python
+Algorithms in Python
 ======
 
 Implementations of a few algorithms and datastructures for fun and profit!
