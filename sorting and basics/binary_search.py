@@ -1,6 +1,3 @@
-from sorting import mergesort
-
-
 def search(arr, item):
     """Performs binary search on an array
     with the given item and returns True or
@@ -13,7 +10,7 @@ def search(arr, item):
     False
     """
 
-    arr = mergesort(arr)
+    arr.sort()
 
     first = 0
     last = len(arr) - 1
