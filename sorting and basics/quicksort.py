@@ -1,6 +1,8 @@
 from random import randint
+
 def qsort(a, start, end):
-    """ quicksort in O(nlogn) and no extra
+    """
+    quicksort in O(nlogn) and no extra
     memory. In place implementation
     >>> from random import sample
     >>> rand_list = [sample(range(100), 10) for j in range(10)]
@@ -19,7 +21,8 @@ def qsort(a, start, end):
         qsort(a, equal+1, end)
 
 def partition(a, l, r):
-    """ partition array with pivot at a[0]
+    """
+    partition array with pivot at a[0]
     in the array a[l...r] that returns the
     index of pivot element
     """
