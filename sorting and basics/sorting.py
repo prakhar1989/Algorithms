@@ -1,5 +1,5 @@
 def mergesort(arr):
-    """ perform mergesort on a list of numbers 
+    """ perform mergesort on a list of numbers
 
     >>> mergesort([5, 4, 1, 6, 2, 3, 9, 7])
     [1, 2, 3, 4, 5, 6, 7, 9]
@@ -55,21 +55,25 @@ def selectionsort(a):
     for i in range(len(a)):
         min = i
         for j in range(i,len(a)):
-            if a[j] < a[min]: 
+            if a[j] < a[min]:
                 min = j
         a[i],a[min] = a[min], a[i]
     return a
 
 def bubblesort(a):
     """ bubble sort implementation
-    
+
     >>> bubblesort([6, 4, 8, 2, 1, 9, 10])
     [1, 2, 4, 6, 8, 9, 10]
     """
-    for i in range(len(a)):
-        for j in range(i, len(a)):
-            if a[i] > a[j]:
-                a[i], a[j] = a[j], a[i]
+    for i in range(len(a)-1):
+        swap_flag=0                         # Flag to check if swapping occurs
+        for j in range(0, len(a)-1-i):
+            if a[j] > a[j+1]:
+                a[j+1], a[j] = a[j], a[j+1]
+                swap_flag=1
+        if swap_flag==0:
+	    break
     return a
 
 
