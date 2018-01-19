@@ -3,7 +3,7 @@ def shellSort(myArray):
     while sublistCount >0:
         for start in range(sublistCount):
             gapInsert(myArray,start,sublistCount)
-	    sublistCount = sublistCount //2
+	sublistCount = sublistCount //2
 
 def gapInsert(myArray,start,gap):
     for x in range(start+gap,len(myArray),gap):
