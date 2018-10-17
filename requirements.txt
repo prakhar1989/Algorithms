@@ -1,0 +1,11 @@
+virutalenv
+pytest==3.9.1
+# atomicwrites==1.2.1
+# attrs==18.2.0
+# funcsigs==1.0.2
+# more-itertools==4.3.0
+# pathlib2==2.3.2
+# pluggy==0.8.0
+# py==1.7.0
+# scandir==1.9.0
+# six==1.11.0
