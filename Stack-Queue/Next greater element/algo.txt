@@ -1,0 +1,26 @@
+https://www.geeksforgeeks.org/next-greater-element/
+Next greated element in an array for every element:
+
+// Brute force
+
+Time complexity: O(n^2)
+Space complexity: O(1)
+
+1) Iterate using two loops and return the next greatest element found for each element else return -1
+
+// Optimised soln
+
+iterate j from the end of the array. for the last element the next greatest element is -1.
+consider a stack. push(arr[n-1]) into it.
+for j= n-2 to 0:
+   if(s.top())>arr[j])
+	s.top() is the next greatest element
+	s.push(arr[j])
+   else if(s.top()<arr[j])
+	while(s.top()<arr[j])
+		s.pop();
+	s.top() is the next greatest element.
+	s.pop(arr[j])
+
+Time complexity: O(n)
+Space complexity: O(n)
