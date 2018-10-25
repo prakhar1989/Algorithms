@@ -1,0 +1,29 @@
+Implement queue using stack:
+
+1. This is opposite to implemetation of stack using queue.
+2. We can implement stack datastructure using two queues.
+
+Algo:
+
+// using two queues
+
+push(s,  x)
+  1) Enqueue x to q1 (assuming size of q1 is unlimited).
+
+pop(s)  
+  1) One by one dequeue everything except the last element from q1 and enqueue to q2.
+  2) Dequeue the last item of q1, the dequeued item is result, store it.
+  3) Swap the names of q1 and q2
+  4) Return the item stored in step 2.
+// Swapping of names is done to avoid one more movement of all elements 
+// from q2 to q1.
+
+// using single queue
+
+push(s, x)
+  1) assume size of queue is l;
+  2) enqueue x into the queue
+  3) one by one dequeue elements in queue and again enqueue it
+
+pop(s)
+  1) dequeue element from queue

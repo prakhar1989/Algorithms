@@ -1,0 +1,62 @@
+Evaluation of postfix oeration:
+
+1. Scan the string from left to right. 
+2. If it is an operand, push the element into the stack and 
+if it is operator, pop the last two elements from the stack and perform the operation.
+3. op2 is the first element poped and op1 is the second element. 
+
+Pseudo Code:
+
+evaluate_postfix(string sxp):
+   create a stack s
+   for i=0 to length(exp)-1:
+      if exp[i]is operand:
+         push(exp[i]);
+      else if exp[i] is operator:
+	 op2= pop()
+         op1= pop()
+         res= perform(op2, op1, exp[i])
+	 push[res]
+   return top of stack
+
+Evaluation of prefix operation:
+
+1. Same as postfix operation. 
+2. Scan the string from right to left instead of left to right.
+3. op1 is the first element poped and op2 is the second element. 
+
+Infix to postfix:
+
+1. Converting from infix to postfix, the order of operands do not change but the order of operators may change.
+2. Scan the string from left to right. Consider an empty stack for operators and a list which is the final postfix expression.
+3. If the element is an operand, simply append it into the list.
+4. If t is an operator, in case there is an operator of higher precedance according to bodmas, pop that elemnt and append it to the list.
+5. Lastly push that operand into the stack.
+6. As you reach the end of the string, pop all elements remaining in the stack and append into the stack.
+
+Pseudo Code:
+
+// ignoring parentheses
+
+Infix_to_postfix(string sxp):
+   create a stack s
+   res <-empty string
+   for i = 0 t length(exp)-1:
+      if exp[i] is an operand:
+         simply append the list
+      else if exp[i] is an operator:
+         while(!s.empty and s.top() has higher precednace)
+	    res <- res + s.top()
+	    s.pop()
+	 s.push(exp[i])
+   while(!s.empty()):
+      res <-res + s.top()
+      s.pop()
+
+// Considering parentheses
+
+1. While scanning the string from left to right, in case of operator, we need to top only till we get an opening parentheses.
+2. If it is an opening of parentheses, push and ending we should go on poping. 
+3. Rest remains same.
+
+

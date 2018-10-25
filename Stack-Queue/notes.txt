@@ -1,0 +1,42 @@
+1. Single array to implement 3 stacks:
+
+Method1: 
+Divide the array into three equl parts and alllow the individual array to grow in that limited space.
+This solution is based on the assumption that we do not have any extra information about the usage of space by individual stacks.
+and that we can’t either modify or use any extra space. 
+With these constraints, we are left with no other choice but to divide equally.
+
+2. Design a stack which in addition to push, pop also has a min function. O(1) time omplexity.
+
+Method1:
+Consider a stack with two parameters storing vlue at each index and min upto that index.
+
+stack <pair<int, int>> s;
+void push(int data)
+{
+    if(S.empty())
+	{s.push(make_pair(data, data));}
+    else{
+	int new_min= min(data, s.top().second())
+	s.push(data, min);
+	}
+}
+
+void pop()
+{s.pop();}
+
+void min()
+{
+    if(s.empty()) return MAX_INT;
+    else{return s.top().second);}
+}
+
+3. Create a mergable stack O(1) compleity
+merge(stack s1, stack s2) merges contents of s2 into s1
+
+Implementing mergable stack through array implementation of stack take O(n) time complexity. Hence, we use linked list implementation.
+
+We use two pointers. One to the start (top) of the linked list for push and pop operations and other to the end of linked list.
+So that head of stack s2 can be quickly linked to the end of stack s1.
+
+Use circular linked list in case we cannot use extra pointer. 
