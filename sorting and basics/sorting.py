@@ -34,6 +34,9 @@ def quicksort(a):
 
     >>> quicksort([6, 4, 8, 2, 1, 9, 10])
     [1, 2, 4, 6, 8, 9, 10]
+
+    >>> quicksort([-1, -10, -100, -200])
+    [-200, -100, -10, -1]
     """
     n = len(a)
     if n<=1:
@@ -51,6 +54,9 @@ def selectionsort(a):
 
     >>> selectionsort([6, 4, 8, 2, 1, 9, 10])
     [1, 2, 4, 6, 8, 9, 10]
+
+    >>> selectionsort([-1, -10, -100, -200])
+    [-200, -100, -10, -1]
     """
     for i in range(len(a)):
         min = i
@@ -65,6 +71,9 @@ def bubblesort(a):
     
     >>> bubblesort([6, 4, 8, 2, 1, 9, 10])
     [1, 2, 4, 6, 8, 9, 10]
+
+    >>> bubblesort([-1, -10, -100, -200])
+    [-200, -100, -10, -1]
     """
     for i in range(len(a)):
         for j in range(i, len(a)):
@@ -77,6 +86,9 @@ def insertionsort(a):
     """ insertion sort implementation
     >>> insertionsort([6, 4, 8, 2, 1, 9, 10])
     [1, 2, 4, 6, 8, 9, 10]
+
+    >>> insertionsort([-1, -10, -100, -200])
+    [-200, -100, -10, -1]
     """
     for i in range(len(a)):
         item = a[i]
