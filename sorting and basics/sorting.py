@@ -1,3 +1,32 @@
+def heapify(a, i, n):
+    m = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+    if l < n and a[l] > a[m]:
+        m = l
+    if r < n and a[r] > a[m]:
+        m = r
+    if m != i:
+        a[m], a[i] = a[i], a[m]
+        heapify(a, m, n)
+
+def heapsort(a):
+    """ heap sort implementation
+    >>> heapsort([0, 5, 3, 2, 2])
+    [0, 2, 2, 3, 5]
+    >>> heapsort([])
+    []
+    >>> heapsort([-2, -5, -45])
+    [-45, -5, -2]
+    """
+    n = len(a)
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(a, i, n)
+    for i in range(n - 1, 0, -1):
+        a[0], a[i] = a[i], a[0]
+        heapify(a, 0, i)
+    return a
+
 def mergesort(arr):
     """ perform mergesort on a list of numbers 
 
