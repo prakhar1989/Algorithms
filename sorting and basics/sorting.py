@@ -9,8 +9,8 @@ def mergesort(arr):
     """
     n = len(arr)
     if n <= 1: return arr
-    a1 = mergesort(arr[:n/2])
-    a2 = mergesort(arr[n/2:])
+    a1 = mergesort(arr[:n//2])
+    a2 = mergesort(arr[n//2:])
     return merge(a1, a2)
 
 def merge(arr_a, arr_b):
