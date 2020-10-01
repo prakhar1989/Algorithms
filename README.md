@@ -1,4 +1,4 @@
-Algorithms in Python
+Few Algorithms in Python
 ======
 
 Implementations of a few algorithms and datastructures for fun and profit!
@@ -11,8 +11,8 @@ Completed
 - Sieve of Eratosthenes for prime numbers
 - Binary Search
 - Counting Inversions in an array
-- Selecting ith order statistic in an array
-- Graph datastructure (directed & undirected)
+- Selecting ith order statistic in an array (ith smallest order)
+- Graph datastructures (directed & undirected)
 - Graph Algos
     - Topological Sorting
     - Shortest hops
