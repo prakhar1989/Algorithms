@@ -2,6 +2,8 @@ Algorithms in Python
 ======
 
 Implementations of a few algorithms and datastructures for fun and profit!
+You can see the implementations of these algorithms and Learn.
+These algorithms are implemented in Python but the Logic remains same and You can try to implement them on your own.
 
 Completed
 ---
