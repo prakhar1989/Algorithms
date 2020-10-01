@@ -46,7 +46,7 @@ Completed
 - Modular multiplicative inverse
 
 
-Tests
+Various Tests Of Algorithms
 ---
     python -m tests.graph_test
     python -m tests.digraph_test
