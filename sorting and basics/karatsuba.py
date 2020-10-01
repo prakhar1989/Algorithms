@@ -1,23 +1,30 @@
 def karatsuba(x, y, b=10):
-    """ returns product of x, y. Uses base b
-    in karatsuba algorithm
-    Gives running time of O(n^1.585) as opposed to
-    O(n^2) of naive multiplication
-    >>> karatsuba(1234223123412323, 1234534213423333123)
-    1523690672850721578619752112274729L
-    """
-
-    if x < 1000 or y < 1000:
-        return x * y
-    m = min(len(str(x)) / 2, len(str(y)) / 2)
-    bm = b**m
-    x1, x0 = x / bm, x % bm
-    y1, y0 = y / bm, y % bm
-    z1 = karatsuba(x1, y1, b)
-    z3 = karatsuba(x0, y0, b)
-    z2 = karatsuba(x1 + x0, y1 + y0, b) - z1 - z3
-    return (bm**2)*z1 + bm*z2 + z3
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod(verbose=True)
+    """Multiply two integers using Karatsuba's algorithm."""
+    #convert to strings for easy access to digits
+    x = str(x)
+    y = str(y)
+    #base case for recursion
+    if len(x) == 1 and len(y) == 1:
+        return int(x) * int(y)
+    if len(x) < len(y):
+        x = zeroPad(x, len(y) - len(x))
+    elif len(y) < len(x):
+        y = zeroPad(y, len(x) - len(y))
+    n = len(x)
+    j = n//2
+    #for odd digit integers
+    if (n % 2) != 0:
+        j += 1    
+    BZeroPadding = n - j
+    AZeroPadding = BZeroPadding * 2
+    a = int(x[:j])
+    b = int(x[j:])
+    c = int(y[:j])
+    d = int(y[j:])
+    #recursively calculate
+    ac = karatsubaMultiplication(a, c)
+    bd = karatsubaMultiplication(b, d)
+    k = karatsubaMultiplication(a + b, c + d)
+    A = int(zeroPad(str(ac), AZeroPadding, False))
+    B = int(zeroPad(str(k - ac - bd), BZeroPadding, False))
+    return A + B + bd
