@@ -1,40 +1,51 @@
-from random import randint
-def qsort(a, start, end):
-    """ quicksort in O(nlogn) and no extra
-    memory. In place implementation
-    >>> from random import sample
-    >>> rand_list = [sample(range(100), 10) for j in range(10)]
-    >>> sortedresult = [sorted(r) for r in rand_list]
-    >>> for r in rand_list: qsort(r, 0, len(r)-1)
-    >>> result = [sortedresult[i] == rand_list[i] for i in range(len(rand_list))]
-    >>> print sum(result)
-    10
-    """
-    if start < end:
-        p = choosepivot(start, end)
-        if p != start:
-            a[p], a[start] = a[start], a[p]
-        equal = partition(a, start, end)
-        qsort(a, start, equal-1)
-        qsort(a, equal+1, end)
+import random
+import time
+import sys
 
-def partition(a, l, r):
-    """ partition array with pivot at a[0]
-    in the array a[l...r] that returns the
-    index of pivot element
-    """
-    pivot, i = a[l], l+1
-    for j in range(l+1, r+1):
-        if a[j] <= pivot:
-            a[i],a[j] = a[j],a[i]
-            i += 1
-    # swap pivot to its correct place
-    a[l], a[i-1] = a[i-1], a[l]
-    return i-1
+def partition(input_list,low,high):
+    i = (low - 1)
+    pivot = input_list[high]
+    for j in range(low, high):
+        if input_list[j] <= pivot:
+            i = i + 1
+            input_list[i], input_list[j] =  input_list[j], input_list[i]
+    input_list[i+1],input_list[high] = input_list[high],input_list[i+1]
+    return (i+1)
 
-def choosepivot(s, e):
-    return randint(s,e)
+# Though there are built in function for sort in numpy
+#We will use Quick Sort algorithm which is considered as FASTEST SORTING ALGORITHM.
+def quickSort(input_list, low, high):
+    if low < high:
+        partition_index = partition(input_list,low,high)
+        quickSort(input_list, low, partition_index - 1)
+        quickSort(input_list, partition_index + 1, high)
 
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod(verbose=True)
+#Function for Random number generation.
+def random_no_generator():
+    randomlist = []
+    for i in range(0,10):
+        n = random.randint(1,500)
+        time.sleep(0.5)
+        print(n ,sep='',end=" ",flush=True)
+        randomlist.append(n)
+    return randomlist
+
+#Calculating complete execution time.
+#""" FOR BEST EXECUTION TIME REMOVE *time.sleep()* FROM PROGRAM """"
+start_time = time.time()
+
+#Random Numbers
+print('Random Numbers : ',end=' ')
+numbers = random_no_generator()
+
+#Sort Random numbers
+quickSort(numbers, 0, len(numbers)-1)
+print("\nSorted array : \t",end=' ')
+time.sleep(0.5)
+for i in range(0,10):
+    time.sleep(0.3)
+    print(numbers[i] ,end=" ",flush=True)
+
+#Execution time    
+end_time = time.time()
+print('\n+] Program execution done in : ',end_time-start_time)
